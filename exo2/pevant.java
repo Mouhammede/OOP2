@@ -23,11 +23,11 @@ public class pevant extends evant
     public int prace;
     public pevant(String n,int a,int t,int p)
     {
+        super(n,a);
         this.t=new tickt[t];
         this.tn=t;
         this.tns=0;
         this.prace=p;
-        super(n,a);
     }
     public int gane()
     {
