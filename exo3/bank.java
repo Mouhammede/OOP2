@@ -78,6 +78,36 @@ public class bank
                 }
             }
         }
+        public boolean checkexestence(int i)
+        {
+            if(ID==i)
+            {
+                return true;
+            }
+            return false;
+        }
+        public boolean tranto(double n,int ri)
+        {
+            date t=new date();
+            if(balence>=n)
+            {
+                balence=balence-n;
+            }
+            else
+            {
+                System.out.println("you do not have "+n+" DA");
+                System.out.println("you have "+balence+" DA");
+                return false;
+            }
+            his.add(new history(t,"transfered from",ID,n,ri));
+            return true;            
+        }
+        public void tranben(double n,int ri)
+        {
+            date t=new date();
+            balence=balence+n;
+            his.add(new history(t,"transfer receved",ID,n,ri));
+        }
     }
     private int getindex(int id,int pass)
     {
@@ -141,6 +171,31 @@ public class bank
         else
         {
             System.out.println("ID or password incoracte");
+        }
+    }
+    private int getindexbyID(int t)
+    {
+        int i;
+        for(i=0;i<accounts.size();i++)
+        {
+            if(accounts.get(i).checkexestence(i))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void tran(double n,int id,int pass,int rid)
+    {
+        int x,y;
+        x=getindexbyID(rid);
+        y=getindex(id,pass);
+        if(y!=-1&&x!=-1)
+        {
+            if(accounts.get(y).tranto(n,rid))
+            {
+                accounts.get(x).tranben(n,id);
+            }
         }
     }
 }
