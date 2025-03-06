@@ -14,6 +14,10 @@ public class history {
         money=m;
         to=t;
     }
+    public String printinfo()
+    {
+        return d.getdate()+"\t"+procedure+"\t"+money+"\t"+PID+"\t"+to;
+    }
     public ArrayList<Object> getinfo()
     {
         ArrayList<Object> u=new ArrayList<>();

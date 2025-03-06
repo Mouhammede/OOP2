@@ -21,7 +21,15 @@ public class bank
             loan=0;
             tax=20;
         }
-        public boolean checkownership(int i,int pass)
+        private void printhistory()
+        {
+            int i;
+            for(i=0;i<his.size();i++)
+            {
+                System.out.println(his.get(i).printinfo());
+            }
+        }
+        private boolean checkownership(int i,int pass)
         {
             if(ID==i&&password==pass)
             {
@@ -29,13 +37,13 @@ public class bank
             }
             return false;
         }
-        public void deposit(double n)
+        private void deposit(double n)
         {
             date t=new date();
             his.add(new history(t,"deposit",ID,n,0));
             balence=balence+n-tax;
         }
-        public void withdraw(double n)
+        private void withdraw(double n)
         {
             date t=new date();
             if(n<=balence)
@@ -49,7 +57,7 @@ public class bank
                 System.out.println("you have "+balence+" DA");
             }
         }
-        public void takeloan(double n)
+        private void takeloan(double n)
         {
             if(loan==0)
             {
@@ -58,7 +66,7 @@ public class bank
                 his.add(new history(t,"Take a loan",ID,n,0));
             }
         }
-        public void paytheloan(double n)
+        private void paytheloan(double n)
         {
             if(loan!=0)
             {
@@ -78,7 +86,7 @@ public class bank
                 }
             }
         }
-        public boolean checkexestence(int i)
+        private boolean checkexestence(int i)
         {
             if(ID==i)
             {
@@ -86,7 +94,7 @@ public class bank
             }
             return false;
         }
-        public boolean tranto(double n,int ri)
+        private boolean tranto(double n,int ri)
         {
             date t=new date();
             if(balence>=n)
@@ -102,7 +110,7 @@ public class bank
             his.add(new history(t,"transfered from",ID,n,ri));
             return true;            
         }
-        public void tranben(double n,int ri)
+        private void tranben(double n,int ri)
         {
             date t=new date();
             balence=balence+n;
@@ -196,6 +204,42 @@ public class bank
             {
                 accounts.get(x).tranben(n,id);
             }
+        }
+    }
+    private static bank b=null;
+    private bank(String n,String l)
+    {
+        name=n;
+        locashon=l;
+    }
+    public bank openbank(String n,String l)
+    {
+        if(b==null)
+        {
+            b=new bank(n,l);
+        }
+        return b;
+    }
+    public void addaccount(int i,int pass,double bal)
+    {
+        accounts.add(new account(i,pass,bal));
+    }
+    public void deleteaccount(int i,int pass)
+    {
+        int y;
+        y=getindex(i,pass);
+        if(y!=-1)
+        {
+            accounts.remove(y);
+        }
+    }
+    public void printhistoryofaccount(int i,int pass)
+    {
+        int y;
+        y=getindex(i,pass);
+        if(y!=-1)
+        {
+            accounts.get(y).printhistory();
         }
     }
 }
