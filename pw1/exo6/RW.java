@@ -48,6 +48,7 @@ public class RW {
                 {
                     System.out.println(s);
                 }
+                r.close();
             } catch (IOException e) 
             {
                 System.err.println("error");
@@ -72,6 +73,7 @@ public class RW {
                 t=new StringBuilder(w);
                 t.setCharAt(w.length()-1,' ');
                 w=t.toString();
+                r.close();
             } catch (IOException e) 
             {
                 System.err.println("error");
@@ -112,6 +114,40 @@ public class RW {
             {
                 System.err.println("error");
             }
+            return true;
+        }
+        return false;
+    }
+    public boolean tranup()
+    {
+        if(!f.isDirectory())
+        {
+            StringBuilder t=new StringBuilder(getcontant());
+            for(int i=0;i<t.length();i++)
+            {
+                if(t.charAt(i)>='a'&&t.charAt(i)<='z')
+                {
+                    t.setCharAt(i,(char)(t.charAt(i)-32));
+                }
+            }
+            write(t.toString());
+            return true;
+        }
+        return false;
+    }
+    public boolean tranlow()
+    {
+        if(!f.isDirectory())
+        {
+            StringBuilder t=new StringBuilder(getcontant());
+            for(int i=0;i<t.length();i++)
+            {
+                if(t.charAt(i)>='A'&&t.charAt(i)<='Z')
+                {
+                    t.setCharAt(i,(char)(t.charAt(i)+32));
+                }
+            }
+            write(t.toString());
             return true;
         }
         return false;

@@ -7,6 +7,7 @@ public class ftest {
         {
             System.out.print(i);
             t=new RW("dr\\"+f.getdirectoryfilesfile()[i].getName());
+            t.tranlow();
             System.out.println(f.getdirectoryfilesfile()[i].getName()+"\t"+f.getdirectoryfilesfile()[i].toPath());
             System.out.println("********************");
             //t.printcontant();
