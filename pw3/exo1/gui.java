@@ -76,6 +76,28 @@ public class gui implements ActionListener
         }
         w.add(d);
     }
+    public Boolean k=true;
+    public int r,a;
+    public String op;
+    public void calc()
+    {
+        if(op=="+")
+        {
+            r=r+a;
+        }
+        else if(op=="-")
+        {
+            r=r-a;
+        }
+        else if(op=="*")
+        {
+            r=r*a;
+        }
+        else if(op=="/")
+        {
+            r=r/a;
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int i=0;i<b.size();i++)
@@ -83,10 +105,37 @@ public class gui implements ActionListener
             if(e.getSource()==b.get(15))
             {
                 u.setText("");
+                k=true;
+                break;
             }
             else if(e.getSource()==b.get(i))
             {
-                u.setText(u.getText()+b.get(i).getText());
+                if(b.get(i).getText()=="=")
+                {
+                    a=Integer.valueOf(u.getText());
+                    calc();
+                    u.setText(r+"");
+                }
+                else if(i>9)
+                {
+                    if(k)
+                    {
+                        r=Integer.valueOf(u.getText());
+                        k=false;
+                    }
+                    else
+                    {
+                        a=Integer.valueOf(u.getText());
+                        calc();
+                    }
+                    op=b.get(i).getText();
+                    u.setText("");
+                }
+                else
+                {
+                    u.setText(u.getText()+b.get(i).getText());
+                }
+                break;
             }
         }
     }
